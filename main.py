@@ -242,6 +242,7 @@ async def start_bot(request: StartRequest):
     # Hardcoded headless setting
     headless = True
     
+    
     try:
         logger.info(f"Starting bot with headless={headless}")
         
