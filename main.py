@@ -242,7 +242,7 @@ async def start_bot(request: StartRequest):
     # Hardcoded headless setting
     headless = True
     
-    
+
     try:
         logger.info(f"Starting bot with headless={headless}")
         
@@ -293,6 +293,22 @@ async def start_bot(request: StartRequest):
             
             # Initialize undetected Chrome driver
             # version_main can be set to match your Chrome version, or leave None for auto-detection
+            # In Docker/headless environments, specify Chrome binary path
+            import os
+            chrome_binary_path = None
+            if os.path.exists("/usr/bin/google-chrome"):
+                chrome_binary_path = "/usr/bin/google-chrome"
+            elif os.path.exists("/usr/bin/google-chrome-stable"):
+                chrome_binary_path = "/usr/bin/google-chrome-stable"
+            elif os.path.exists("/usr/bin/chromium"):
+                chrome_binary_path = "/usr/bin/chromium"
+            elif os.path.exists("/usr/bin/chromium-browser"):
+                chrome_binary_path = "/usr/bin/chromium-browser"
+            
+            if chrome_binary_path:
+                options.binary_location = chrome_binary_path
+                logger.info(f"Using Chrome binary at: {chrome_binary_path}")
+            
             driver = uc.Chrome(
                 options=options,
                 version_main=None,  # Auto-detect Chrome version
