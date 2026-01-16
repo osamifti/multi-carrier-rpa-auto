@@ -288,6 +288,7 @@ async def start_bot(request: StartRequest):
                 "credentials_enable_service": False,
                 "profile.password_manager_enabled": False,
                 "profile.default_content_setting_values.notifications": 2
+                
             }
             options.add_experimental_option("prefs", prefs)
             
