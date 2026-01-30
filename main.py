@@ -312,7 +312,7 @@ async def start_bot(request: StartRequest):
             
             driver = uc.Chrome(
                 options=options,
-                version_main=None,  # Auto-detect Chrome version
+                version_main=144,  # Force ChromeDriver version 144 to match Chrome browser
                 use_subprocess=True,  # Use subprocess for better isolation
                 driver_executable_path=None  # Auto-download chromedriver
             )
